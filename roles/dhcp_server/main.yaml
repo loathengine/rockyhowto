@@ -3,7 +3,7 @@
     
   tasks:
   
-  - name: Install dhcp-server
+  - name: Install dhcp-server service
     dnf:
       name: dhcp-server
       state: latest
