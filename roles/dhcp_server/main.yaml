@@ -1,0 +1,63 @@
+- hosts:
+    - services
+  tasks:
+  - name: Install dhcp-server
+    dnf:
+      name: dhcp-server
+      state: latest
+
+  - name: Clear the contents of the file
+    file:
+      path: /etc/dhcp/dhcpd.conf
+      state: absent
+
+  - name: Write a block of text to the file
+    blockinfile:
+      path: /etc/dhcp/dhcpd.conf
+      create: true
+      marker: ""
+      block: |
+        option domain-name "rockyhowto.lab";
+        option domain-name-servers 10.9.8.10;
+        option routers 10.9.8.1;
+        filename "pxelinux.0";
+        next-server 10.9.8.10;
+        default-lease-time 600;
+        max-lease-time 7200;
+        authoritative;
+        subnet 10.9.8.0 netmask 255.255.255.0 { 
+          range 10.9.8.200 10.9.8.225;}
+        host cwo01 {
+        	hardware ethernet    6c:4b:90:3a:4b:9a;
+        	fixed-address        10.9.8.1;
+                option host-name "cwo01";}
+        host cwo02 {
+        	hardware ethernet    a0:8c:fd:c5:f4:46;
+        	fixed-address        10.9.8.10;
+                option host-name "cwo02";}
+        host cpt01 {
+        	hardware ethernet    1c:fd:08:73:bb:7c;
+        	fixed-address        10.9.8.110;
+                option host-name "cpt01";}
+        host sgt01 {
+        	hardware ethernet    1c:fd:08:72:46:1e;
+        	fixed-address        10.9.8.120;
+                option host-name "sgt01";}
+        host pvt01 {
+        	hardware ethernet    1c:fd:08:73:bb:e6;
+        	fixed-address        10.9.8.130;
+                option host-name "pvt01";}
+        host pvt02 {
+        	hardware ethernet    1c:fd:08:73:bd:ea;
+        	fixed-address        10.9.8.140;
+                option host-name "pvt02";}
+        host tor01 {
+        	hardware ethernet    c8:9e:43:9c:4e:a2;
+        	fixed-address        10.9.8.2;
+                option host-name "tor01";} 
+
+  - name: Reboot and Enable dhcp_server service
+    ansible.builtin.systemd_service:
+      name: dhcpd
+      enabled: true
+      state: reloaded
