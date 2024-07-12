@@ -1,1 +1,41 @@
+- name: Configure gateway
+  hosts: edge
+  
+  tasks:
+
+  - name: Add sysctl net.ipv4.ip_forward
+    ansible.posix.sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      state: present
+      reload: true
+
+    - name: change outside interface to external zone
+      firewalld:
+        zone: external
+        interface: "{{ cwo01_external_interface_label }}"
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: change inside interface to internal zone
+      firewalld:
+        zone: internal
+        interface: "{{ cwo01_internal_interface_label }}"
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Use shell commands to setup policy
+      shell: |
+        firewall-cmd --new-policy bridge --permanent
+        firewall-cmd --runtime-to-permanent
+        firewall-cmd --reload
+        firewall-cmd --policy=bridge --add-ingress-zone=internal
+        firewall-cmd --policy=bridge --add-egress-zone=external
+        firewall-cmd --policy=bridge --set-target=ACCEPT --permanent
+        firewall-cmd --runtime-to-permanent
+        firewall-cmd --reload
+
+
 
