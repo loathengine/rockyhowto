@@ -1,0 +1,42 @@
+- name: Configure local repo
+  hosts: ipaclients
+  vars:
+    local_repos:
+      - file: cwo02-baseos
+        name: cwo02-baseos
+        description: cwo02 RockyLinux 9 BaseOS
+        baseurl: http://10.9.8.10/repo/baseos/
+      - file: cwo02-epel
+        name: cwo02-epel
+        description: cwo02 RockyLinux 9 EPEL
+        baseurl: http://10.9.8.10/repo/epel/
+      - file: cwo02-appstream
+        name: cwo02-appstream
+        description: cwo02 RockyLinux 9 Appstream
+        baseurl: http://10.9.8.10/repo/appstream
+      - file: cwo02-wazuh
+        name: cwo02-wazuh
+        description: cwo02 RockyLinux 9 wazuh
+        baseurl: http://10.9.8.10/repo/wazuh/
+      - file: cwo02-docker-ce-stable
+        name: cwo02-docker-ce-stable
+        description: cwo02 Docker CE Stable
+        baseurl: http://10.9.8.10/repo/docker-ce-stable/
+      - file: cwo02-kubernetes
+        name: cwo02-kubernetes
+        description: cwo02 Google Kubernetes
+        baseurl: http://10.9.8.10/repo/kubernetes/
+
+  tasks:
+
+    - name: Delete default repos
+      script: /bin/rm -rf /etc/yum.repos.d/*
+
+    - name: Build up local repo conf
+      yum_repository:
+        file: "{{ item.file }}"
+        name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        baseurl: "{{ item.baseurl }}"
+        gpgcheck: False
+      loop: "{{ local_repos }}"
