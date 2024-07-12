@@ -1,8 +1,9 @@
 - name: Update DNF config
   hosts: services
+
   tasks:
+
   - name: Make/Update /etc/dnf/dnf.conf
-    tags: dnf
     lineinfile:
       dest: /etc/dnf/dnf.conf
       line: "{{ item }}"
