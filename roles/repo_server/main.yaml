@@ -1,0 +1,129 @@
+- name: Configure local repo
+  hosts: services
+  vars:
+    local_repos:
+      - file: local_baseos
+        name: local_baseos
+        description: Local RockyLinux 9 BaseOS
+        baseurl: file:///home/repo/baseos
+      - file: local_appstream
+        name: local_appstream
+        description: Local RockyLinux 9 Appstream
+        baseurl: file:///home/repo/appstream
+      - file: local_epel
+        name: local_epel
+        description: Local RockyLinux 9 EPEL
+        baseurl: file:///home/repo/epel
+      - file: local_docker-ce-stable
+        name: local_docker-ce-stable
+        description: Docker CE Stable
+        baseurl: file:///home/repo/docker-ce-stable
+      - file: local_kubernetes
+        name: local_kubernetes
+        description: Kubernetes
+        baseurl: file:///home/repo/kubernetes
+      - file: local_wazuh
+        name: local_wazuh
+        description: Wazuh
+        baseurl: file:///home/repo/wazuh
+
+  tasks:
+
+    - name: Install createrepo RPM
+      tags: repo
+      package:
+        name: createrepo
+        state: present
+
+    - name: Install yum-utils RPM
+      tags: repo
+      package:
+        name: yum-utils
+        state: present
+
+    - name: Delete default repos
+      command: /bin/rm -rf /etc/yum.repos.d/*
+
+    - name: Build up tmp repo conf
+      ansible.builtin.blockinfile:
+        path: /tmp/tmp.repo
+        create: yes
+        block: |
+          [baseos]
+          name=Rocky Linux $releasever - BaseOS
+          mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever$rltype
+          gpgcheck=1
+          enabled=1
+          countme=1
+          metadata_expire=6h
+          gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
+
+          [epel]
+          name=Extra Packages for Enterprise Linux $releasever - $basearch
+          metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+          enabled=1
+          gpgcheck=1
+          countme=1
+          gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+
+          [appstream]
+          name=Rocky Linux $releasever - AppStream
+          mirrorlist=https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever$rltype
+          gpgcheck=1
+          enabled=1
+          countme=1
+          metadata_expire=6h
+          gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9
+
+          [docker-ce-stable]
+          name=Docker CE Stable - $basearch
+          baseurl=https://download.docker.com/linux/centos/$releasever/$basearch/stable
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/centos/gpg
+
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+
+          [wazuh]
+          gpgcheck=0
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          name=EL-\$releasever - Wazuh
+          baseurl=https://packages.wazuh.com/4.x/yum/
+          protect=1
+
+    - name: Create repo directories and populate form the internet
+      tags: repo
+      ignore_errors: true
+      shell: |
+          for i in baseos epel appstream docker-ce-stable kubernetes wazuh; 
+            do mkdir -p /home/repo/$i;
+            dnf reposync \
+            --download-path=/home/repo/ \
+            --repoid=$i \
+            --newest-only \
+            --download-metadata \
+            --config=/tmp/tmp.repo ;
+            done
+      args:
+        executable: /bin/bash
+          
+    - name: Build up local repo conf
+      yum_repository:
+        file: "{{ item.file }}"
+        name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        baseurl: "{{ item.baseurl }}"
+        gpgcheck: False
+      loop: "{{ local_repos }}"
+
+    - name: Delete rocky repos
+      script: /bin/rm -rf /etc/yum.repos.d/rocky*
+
+    - name: Update selinux
+      command: restorecon -r /home/repo
