@@ -40,19 +40,19 @@
         host cpt01 {
         	hardware ethernet    1c:fd:08:73:bb:7c;
         	fixed-address        10.9.8.110;
-                option host-name "cpt01";}
+                option host-name "api.rockycluster";}
         host sgt01 {
         	hardware ethernet    1c:fd:08:72:46:1e;
         	fixed-address        10.9.8.120;
-                option host-name "sgt01";}
+                option host-name "control-plane0.rockycluster";}
         host pvt01 {
-        	hardware ethernet    1c:fd:08:73:bb:e6;
-        	fixed-address        10.9.8.130;
-                option host-name "pvt01";}
-        host pvt02 {
         	hardware ethernet    1c:fd:08:73:bd:ea;
+        	fixed-address        10.9.8.130;
+                option host-name "control-plane1.rockycluster";}
+        host pvt02 {
+        	hardware ethernet    1c:fd:08:73:bb:e6;
         	fixed-address        10.9.8.140;
-                option host-name "pvt02";}
+                option host-name "control-plane2.rockycluster";}
         host tor01 {
         	hardware ethernet    c8:9e:43:9c:4e:a2;
         	fixed-address        10.9.8.2;
