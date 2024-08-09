@@ -13,17 +13,17 @@ pvt02
 cwo02
 
 [ipaclients]
-cwo01
-cpt01
+edg01
+svc02
 sgt01
 pvt01
 pvt02
 
 [edge]
-cwo01
+edg01
 
 [services]
-cwo02
+svc01
 
 [kubeall]
 cpt01
