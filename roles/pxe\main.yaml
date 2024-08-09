@@ -1,0 +1,9 @@
+- hosts:
+    - services
+    
+  tasks:
+  
+  - name: Install tftp service
+    dnf:
+      name: tftpd
+      state: latest
