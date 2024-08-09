@@ -5,5 +5,22 @@
   
   - name: Install tftp service
     dnf:
-      name: tftpd
+      name:
+        - tftp-server
+        - syslinux
+        - syslinux-tftpboot
+        - policycoreutils-python-utils 
       state: latest
+
+  - name: Create dir for the boot files
+    ansible.builtin.file:
+      path: /home/tftpboot
+      state: directory
+      
+  - name: Update SElinux to allow tftp service to use the new dir
+    command: 
+    - semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
+    - restorecon -R -v /home/tftpboot
+
+
+      
