@@ -12,10 +12,17 @@
         - policycoreutils-python-utils 
       state: latest
 
-  - name: Create new dir for the boot files
+  - name: Create new dirs
     ansible.builtin.file:
-      path: /home/tftpboot
+      path: "{{ item }}"
       state: directory
+    loop:
+      - /home/iso/mnt
+      - /home/tftpboot
+      - /home/tftpboot/rocky9pxe
+      - /home/tftpboot/rocky9iso
+      - /home/tftpboot/rocky9ks
+      - /home/tftpboot/pxelinux.cfg
       
   - name: Update SElinux to allow tftp service to use the new dir
     command: 
@@ -34,6 +41,28 @@
       state: restarted
       daemon_reload: true
       name: tftp
+
+- name: Extract kernel and ramdisk from a LiveCD
+  community.general.iso_extract:
+    image: /home/iso/Rocky9.iso
+    dest: /home/tftpboot/rocky9pxe
+    files:
+    - images/pxeboot/initrd.img
+    - images/pxeboot/initrd.img
+
+  - name: copy contents to iso directorys
+    shell: |
+      mount -o loop /home/iso/Rocky9.iso /home/iso/mnt
+      cp -rpv /home/iso/mnt/* /home/tftpboot/rocky9iso
+      cp -rpv /usr/share/syslinux/* /home/tftpboot
+
+
+
+
+
+
+
+
 
 
 
