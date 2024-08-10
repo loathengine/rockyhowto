@@ -42,13 +42,13 @@
       daemon_reload: true
       name: tftp
 
-- name: Extract kernel and ramdisk from a LiveCD
-  community.general.iso_extract:
-    image: /home/iso/Rocky9.iso
-    dest: /home/tftpboot/rocky9pxe
-    files:
-    - images/pxeboot/initrd.img
-    - images/pxeboot/initrd.img
+  - name: Extract kernel and ramdisk from a LiveCD
+    community.general.iso_extract:
+      image: /home/iso/Rocky9.iso
+      dest: /home/tftpboot/rocky9pxe
+      files:
+      - images/pxeboot/initrd.img
+      - images/pxeboot/initrd.img
 
   - name: copy contents to iso directorys
     shell: |
@@ -88,7 +88,7 @@
         timezone Etc/UTC --utc
         rootpw --lock
         user --groups=wheel --name=breakglass --password=$6$FVwlA/hG5VmFeGaR$VcIZkgMWKxRYmawyDFOmgZuQ9Fzy0uh.Q.y3N6xUvURQ0bbXzeDy0n3mrX.idi1Wj1abppIfSmeloO5fn2SFC/ --iscrypted
-
+   
   - name: Write a block of text to the file
     blockinfile:
       path: /home/tftpboot/pxelinux.cfg/default
@@ -99,7 +99,7 @@
         prompt 0
         timeout 50
         ONTIMEOUT 1
-        
+          
         menu title ########## Lab PXE Boot Menu ##########
         label 1
            menu label ^1) Boot from local drive
