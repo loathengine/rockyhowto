@@ -12,7 +12,7 @@
         - policycoreutils-python-utils 
       state: latest
 
-  - name: Create dir for the boot files
+  - name: Create new dir for the boot files
     ansible.builtin.file:
       path: /home/tftpboot
       state: directory
@@ -22,5 +22,23 @@
     - semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
     - restorecon -R -v /home/tftpboot
 
+  - name: Edit the service to use the new dir
+    lineinfile: 
+      path: /lib/systemd/system/tftp.service 
+      regexp: '^(.*)ExecStart(.*)$' 
+      line: 'ExecStart=/usr/sbin/in.tftpd -s /home/tftpboot'
+      backrefs: yes
 
-      
+  - name: Restart service tftp also issue daemon-reload to pick up config changes
+    ansible.builtin.systemd_service:
+      state: restarted
+      daemon_reload: true
+      name: tftp
+
+
+
+
+
+
+
+
