@@ -1,1 +1,22 @@
+- hosts:
+    - services
+    
+  tasks:
+  
+  - name: Install git
+    dnf:
+      name:
+        - git
+      state: latest
 
+  - name: Create new dirs
+    ansible.builtin.file:
+      path: /home/auto
+      state: directory
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/loathengine/rockyhowto.git'
+      dest: /home/auto
+
+      
