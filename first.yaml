@@ -3,5 +3,5 @@
     - dnf
     - repo_server
     - ntp
-    - dhcp
+    - dhcp_server
     - pxe
