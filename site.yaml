@@ -1,3 +1,5 @@
-  roles:
-    - dhcp_server
-    - dnf
+- import_playbook: dnf.yaml
+- import_playbook: repo_server.yaml
+- import_playbook: ntp.yaml
+- import_playbook: dhcp.yaml
+- import_playbook: pxe.yaml
