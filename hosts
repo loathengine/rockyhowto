@@ -3,21 +3,22 @@ tor01
 
 [rockylinux]
 edg01
-svc02
-cpt01
-sgt01
-pvt01
-pvt02
+svc01
+node01
+node02
+node03
+node04
 
 [ipaserver]
-cwo02
+svc01
 
 [ipaclients]
 edg01
-svc02
-sgt01
-pvt01
-pvt02
+svc01
+node01
+node02
+node03
+node04
 
 [edge]
 edg01
@@ -26,15 +27,15 @@ edg01
 svc01
 
 [kubeall]
-cpt01
-sgt01
-pvt01
-pvt02
+node01
+node02
+node03
+node04
 
 [controlplain]
-cpt01
+node01
 
 [kubenode]
-sgt01
-pvt01
-pvt02
+node02
+node03
+node04
