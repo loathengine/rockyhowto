@@ -1,4 +1,4 @@
-- hosts:
+  - name: Install dhcp-server
     
   tasks:
   
