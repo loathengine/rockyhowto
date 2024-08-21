@@ -1,2 +1,1 @@
 - import_playbook: first.yaml
-- import_playbook: second.yaml
