@@ -1,0 +1,7 @@
+- hosts: services
+  roles:
+    - dnf
+    - repo_server
+    - ntp
+    - dhcp
+    - pxe
