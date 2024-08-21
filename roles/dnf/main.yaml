@@ -1,6 +1,4 @@
 - name: Update DNF config
-  hosts: services
-
   tasks:
 
   - name: Make/Update /etc/dnf/dnf.conf
