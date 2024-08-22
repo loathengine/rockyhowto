@@ -1,6 +1,4 @@
-- hosts:
-    - services
-    
+- name: Build PXE server
   tasks:
   
   - name: Install tftp service
