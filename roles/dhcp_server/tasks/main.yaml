@@ -1,6 +1,3 @@
-- name: Install dhcp-server
-  tasks:
-  
   - name: Install dhcp-server service
     dnf:
       name: dhcp-server
