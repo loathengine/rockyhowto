@@ -1,41 +1,82 @@
-[networking]
-tor01
+Example hosts yaml
+all:
+  hosts:
+    tor01.rockyhowto.lab
+      IP: 10.9.8.5
+    edg01.rockyhowto.lab:
+      IP: 10.9.8.1
+      MAC: 6c:4b:90:3a:4b:9a
+      NIC: enp3s0f0
+      boot: sda
+    svc01.rockyhowto.lab:
+      IP: 10.9.8.10
+      MAC: a0:8c:fd:c5:f4:46
+      NIC: enp3s0f0
+      boot: sda
+    node01.rockyhowto.lab:
+      IP: 10.9.8.110
+      MAC: 1c:fd:08:73:bb:7c
+      NIC: enp3s0f0
+      boot: sda
+    node02.rockyhowto.lab:
+      IP: 10.9.8.120
+      MAC: 1c:fd:08:72:46:1e
+      NIC: eno1
+      boot: sda
+    node03.rockyhowto.lab:
+      IP: 10.9.8.130
+      MAC: 1c:fd:08:73:bd:ea
+      NIC: eno1
+      boot: sda
+    node04.rockyhowto.lab:
+      IP: 10.9.8.140
+      MAC: 1c:fd:08:73:bb:e6
+      NIC: eno1
+      boot: sda
 
-[rockylinux]
-edg01
-svc01
-node01
-node02
-node03
-node04
+networking:
+  hosts:
+    tor01.rockyhowto.lab
 
-[ipaserver]
-svc01
 
-[ipaclients]
-edg01
-svc01
-node01
-node02
-node03
-node04
+rockylinux:
+  hosts:
+    edg01.rockyhowto.lab:
+    svc01.rockyhowto.lab:
+    node01.rockyhowto.lab:
+    node02.rockyhowto.lab:
+    node03.rockyhowto.lab:
+    node04.rockyhowto.lab:
 
-[edge]
-edg01
+ipaserver:
+  hosts:
+    svc01.rockyhowto.lab:
 
-[services]
-svc01
+ipaclients:
+  hosts:
+    edg01.rockyhowto.lab:
+    node01.rockyhowto.lab:
+    node02.rockyhowto.lab:
+    node03.rockyhowto.lab:
+    node04.rockyhowto.lab:
 
-[kubeall]
-node01
-node02
-node03
-node04
+gateway:
+  hosts:
+    edg01.rockyhowto.lab:
 
-[controlplain]
-node01
+kubeall:
+  hosts:
+    node01.rockyhowto.lab:
+    node02.rockyhowto.lab:
+    node03.rockyhowto.lab:
+    node04.rockyhowto.lab:
 
-[kubenode]
-node02
-node03
-node04
+kubecontrol:
+  hosts:
+    node01.rockyhowto.lab:
+
+kubenode:
+  hosts:
+    node02.rockyhowto.lab:
+    node03.rockyhowto.lab:
+    node04.rockyhowto.lab:
