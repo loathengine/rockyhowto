@@ -1,6 +1,5 @@
-- hosts: services
-  become_user: breakglass
-  become: yes
+- hosts: 127.0.0.1
+  connection: local
   roles:
     - dnf
     - repo_server
