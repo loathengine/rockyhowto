@@ -1,5 +1,5 @@
 - name: Configure local repo
-  hosts: services
+
   vars:
     local_repos:
       - file: local_baseos
