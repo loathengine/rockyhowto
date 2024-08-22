@@ -1,6 +1,4 @@
 - name: Configure gateway
-  hosts: edge
-  
   tasks:
 
   - name: Add sysctl net.ipv4.ip_forward
