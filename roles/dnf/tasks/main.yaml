@@ -1,4 +1,6 @@
-- name: Make/Update /etc/dnf/dnf.conf
+- hosts: local
+  tasks:
+  - name: Make/Update /etc/dnf/dnf.conf
   lineinfile:
     dest: /etc/dnf/dnf.conf
     line: "{{ item }}"
