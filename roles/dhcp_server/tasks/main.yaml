@@ -24,33 +24,33 @@
         authoritative;
         subnet 10.9.8.0 netmask 255.255.255.0 { 
           range 10.9.8.200 10.9.8.225;}
-        host cwo01 {
+        host edg01 {
         	hardware ethernet    6c:4b:90:3a:4b:9a;
         	fixed-address        10.9.8.1;
-                option host-name "cwo01";}
-        host cwo02 {
+                option host-name "edg01";}
+        host svc01 {
         	hardware ethernet    a0:8c:fd:c5:f4:46;
         	fixed-address        10.9.8.10;
-                option host-name "cwo02";}
-        host cpt01 {
+                option host-name "svc01";}
+        host node01 {
         	hardware ethernet    1c:fd:08:73:bb:7c;
         	fixed-address        10.9.8.110;
-                option host-name "api.rockycluster";}
-        host sgt01 {
+                option host-name "node01";}
+        host node02 {
         	hardware ethernet    1c:fd:08:72:46:1e;
         	fixed-address        10.9.8.120;
-                option host-name "control-plane0.rockycluster";}
-        host pvt01 {
-        	hardware ethernet    1c:fd:08:73:bd:ea;
+                option host-name "node02";}
+        host node03 {
+          hardware ethernet    1c:fd:08:73:bb:e6;
         	fixed-address        10.9.8.130;
-                option host-name "control-plane1.rockycluster";}
-        host pvt02 {
-        	hardware ethernet    1c:fd:08:73:bb:e6;
+                option host-name "node03";}
+        host node04 {
+        	hardware ethernet    1c:fd:08:73:bd:ea;
         	fixed-address        10.9.8.140;
-                option host-name "control-plane2.rockycluster";}
+                option host-name "node04";}
         host tor01 {
         	hardware ethernet    c8:9e:43:9c:4e:a2;
-        	fixed-address        10.9.8.2;
+        	fixed-address        10.9.8.5;
                 option host-name "tor01";} 
 
   - name: Enable and reboot dhcp_server service
