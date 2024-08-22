@@ -1,4 +1,3 @@
-Example hosts yaml
 all:
   hosts:
     tor01.rockyhowto.lab
