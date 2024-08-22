@@ -1,4 +1,3 @@
-tasks:
 - name: Make/Update /etc/dnf/dnf.conf
   lineinfile:
     dest: /etc/dnf/dnf.conf
