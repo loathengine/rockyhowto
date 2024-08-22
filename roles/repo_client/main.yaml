@@ -1,5 +1,5 @@
 - name: Configure local repo
-  hosts: ipaclients
+
   vars:
     local_repos:
       - file: cwo02-baseos
