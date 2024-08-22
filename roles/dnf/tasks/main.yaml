@@ -1,0 +1,10 @@
+- name: Update DNF config
+  tasks:
+
+  - name: Make/Update /etc/dnf/dnf.conf
+    lineinfile:
+      dest: /etc/dnf/dnf.conf
+      line: "{{ item }}"
+    with_items:
+    - "max_parallel_downloads=20"
+    - "fastestmirror=true"
