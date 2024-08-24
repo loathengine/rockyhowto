@@ -4,13 +4,13 @@ all:
       IP: 10.9.8.5
     edg01.rockyhowto.lab:
       IP: 10.9.8.1
-      MAC: 6c:4b:90:3a:4b:9a
-      NIC: enp3s0f0
+      MAC: a0:48:1c:93:e7:24
+      NIC: eno1
       boot: sda
     svc01.rockyhowto.lab:
       IP: 10.9.8.10
-      MAC: a0:8c:fd:c5:f4:46
-      NIC: enp3s0f0
+      MAC: a0:48:1c:89:ef:2b
+      NIC: eno1
       boot: sda
     node01.rockyhowto.lab:
       IP: 10.9.8.110
