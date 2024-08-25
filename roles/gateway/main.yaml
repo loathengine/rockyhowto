@@ -1,13 +1,6 @@
 - name: Configure gateway
   tasks:
 
-  - name: Add sysctl net.ipv4.ip_forward
-    ansible.posix.sysctl:
-      name: net.ipv4.ip_forward
-      value: '1'
-      state: present
-      reload: true
-
     - name: change outside interface to external zone
       firewalld:
         zone: external
