@@ -30,7 +30,7 @@
     ipa-server-install -v \
       --unattended \
       --domain=rockyhowto.lab \
-      --hostname cwo02.rockyhowto.lab \
+      --hostname svc01.rockyhowto.lab \
       --ip-address=10.9.8.10 \
       --realm ROCKYHOWTO.LAB \
       --ds-password ChangePassword \
