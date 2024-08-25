@@ -1,3 +1,30 @@
+vars:
+  local_repos:
+    - file: local_baseos
+      name: local_baseos
+      description: Local RockyLinux 9 BaseOS
+      baseurl: file:///home/repo/baseos
+    - file: local_appstream
+      name: local_appstream
+      description: Local RockyLinux 9 Appstream
+      baseurl: file:///home/repo/appstream
+    - file: local_epel
+      name: local_epel
+      description: Local RockyLinux 9 EPEL
+      baseurl: file:///home/repo/epel
+    - file: local_docker-ce-stable
+      name: local_docker-ce-stable
+      description: Docker CE Stable
+      baseurl: file:///home/repo/docker-ce-stable
+    - file: local_kubernetes
+      name: local_kubernetes
+      description: Kubernetes  
+      baseurl: file:///home/repo/kubernetes
+    - file: local_wazuh
+      name: local_wazuh
+      description: Wazuh
+      baseurl: file:///home/repo/wazuh
+    
     - name: Install createrepo RPM
       tags: repo
       package:
