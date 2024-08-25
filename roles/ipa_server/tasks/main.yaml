@@ -42,26 +42,49 @@
 
 - name: Run kinit
   ignore_errors: true
-  shell: echo 'ChangePassword' | kinit username
+  shell: echo 'ChangePassword' | kinit admin
 
 - name: Setup dns zone
   ignore_errors: true
   shell: ipa dnszone-mod --allow-transfer=10.9.8.0/24 rockyhowto.lab
 
-#- name: Setup NFS share for user home directories
-#  ignore_errors: true
-#  shell: |
-#    systemctl enable --now nfs-server rpcbind
-#    mkdir /home/domainusers
-#    echo '/home/domainusers 10.9.8.0/24(rw,sync,no_subtree_check,root_squash)' >> /etc/exports
-#    exportfs -rav
-#    ipa service-add nfs/cwo02.rockyhowto.lab
-#    kadmin.local
-#    ktadd nfs/cwo02.rockyhowto.lab
-#    exit
-#    systemctl restart nfs-server
-#    ipa config-mod --homedirectory=/home/domainusers --defaultshell=/bin/bash
+- name: Setup NFS share for user home directories
+  ignore_errors: true
+  shell: |
+    systemctl enable --now nfs-server rpcbind
+    mkdir /home/domainusers
+    echo '/home/domainusers 10.9.8.0/24(rw,sync,no_subtree_check,root_squash)' >> /etc/exports
+    exportfs -rav
+    ipa service-add nfs/svc01.rockyhowto.lab
+    kadmin.local ktadd nfs/svc01.rockyhowto.lab
+    systemctl restart nfs-server
+    ipa config-mod --homedirectory=/home/domainusers --defaultshell=/bin/bash
 
+- name: Setup sudoers group and permissions
+  ignore_errors: true
+  shell: |
+    ipa group-add --desc='local administrators' sudoers
+    ipa sudorule-add sudoers_sudo \
+      --hostcat=all \
+      --runasusercat=all \
+      --runasgroupcat=all \
+      --cmdcat=all
+    ipa sudorule-add-user sudoers_sudo --group sudoers
+    ipa sudorule-add-option sudoers_sudo --sudooption='!authenticate'
+    authselect enable-feature with-sudo
+    systemctl restart sssd
 
+- name: Setup ansible user to work with freeIPA
+  ignore_errors: true
+  shell: |
+    ipa user-add ansible --first=Ansible --last=Automation --random
+    mkdir -m0750 -p /home/domainusers/ansible/.ssh
+    ssh-keygen \
+      -C ansible@rockyhowto.lab \
+      -f /home/domainusers/ansible/.ssh/id_rsa \
+      -q -N ""
+    chown -hRv ansible:ansible /home/domainusers/ansible
+    ipa user-mod ansible --sshpubkey="$(cat /home/domainusers/ansible/.ssh/id_rsa.pub)"
+    ipa group-add-member sudoers --users=ansible
 
 
