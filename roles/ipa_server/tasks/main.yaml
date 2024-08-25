@@ -1,0 +1,67 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: svc01
+
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - freeipa-server
+  - ipa-server-dns
+  - freeipa-client
+
+- name: Add FQDN to local hosts file
+  lineinfile:
+    dest: /etc/hosts
+    line: "10.9.8.10   svc01.rockyhowto.lab svc01"
+
+- name: Clean up resolve
+  lineinfile:
+    dest: /etc/resolv.conf
+    line: "{{ item }}"
+  with_items:
+  - "search lan rockyhowto.lab"
+  - "nameserver 10.9.8.10"
+
+- name: Run freeIPA configuration script
+  ignore_errors: true
+  shell: |
+    ipa-server-install -v \
+      --unattended \
+      --domain=rockyhowto.lab \
+      --hostname cwo02.rockyhowto.lab \
+      --ip-address=10.9.8.10 \
+      --realm ROCKYHOWTO.LAB \
+      --ds-password ChangePassword \
+      --admin-password ChangePassword \
+      --setup-dns \
+      --auto-reverse \
+      --forwarder=8.8.8.8 \
+      --ntp-pool=north-america.pool.ntp.org
+
+- name: Run kinit
+  ignore_errors: true
+  shell: echo 'ChangePassword' | kinit username
+
+- name: Setup dns zone
+  ignore_errors: true
+  shell: ipa dnszone-mod --allow-transfer=10.9.8.0/24 rockyhowto.lab
+
+#- name: Setup NFS share for user home directories
+#  ignore_errors: true
+#  shell: |
+#    systemctl enable --now nfs-server rpcbind
+#    mkdir /home/domainusers
+#    echo '/home/domainusers 10.9.8.0/24(rw,sync,no_subtree_check,root_squash)' >> /etc/exports
+#    exportfs -rav
+#    ipa service-add nfs/cwo02.rockyhowto.lab
+#    kadmin.local
+#    ktadd nfs/cwo02.rockyhowto.lab
+#    exit
+#    systemctl restart nfs-server
+#    ipa config-mod --homedirectory=/home/domainusers --defaultshell=/bin/bash
+
+
+
+
