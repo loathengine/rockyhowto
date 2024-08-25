@@ -1,6 +1,3 @@
-
-  tasks:
-
     - name: Install createrepo RPM
       tags: repo
       package:
