@@ -5,4 +5,4 @@
     - repo_server
     - ntp
     - dhcp_server
-    - pxe
+#    - pxe
