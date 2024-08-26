@@ -88,3 +88,13 @@
     ipa group-add-member sudoers --users=ansible
 
 
+- name: add lines to hosts file
+  lineinfile: 
+    dest: /etc/httpd/conf.d/repo.conf
+      line: |
+        Alias /repo/ /home/repo/
+        <Directory /home/repo/>
+          Options Indexes FollowSymLinks
+          AllowOverride None
+          Require all granted
+        </Directory>
