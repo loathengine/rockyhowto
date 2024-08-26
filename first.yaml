@@ -5,4 +5,5 @@
     - repo_server
     - ntp
     - dhcp_server
+    - pxe
     - ipa_server
