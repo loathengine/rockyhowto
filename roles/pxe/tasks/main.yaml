@@ -23,9 +23,9 @@
       - /home/tftpboot/pxelinux.cfg
       
   - name: Update SElinux to allow tftp service to use the new dir
-    command: 
-    - semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
-    - restorecon -R -v /home/tftpboot
+    shell: |
+      semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
+      restorecon -R -v /home/tftpboot
 
   - name: Edit the service to use the new dir
     lineinfile: 
