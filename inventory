@@ -1,6 +1,6 @@
 all:
   hosts:
-    tor01.rockyhowto.lab
+    tor01.rockyhowto.lab:
       IP: 10.9.8.5
     edg01.rockyhowto.lab:
       IP: 10.9.8.1
