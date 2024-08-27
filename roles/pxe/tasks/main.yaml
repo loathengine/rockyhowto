@@ -52,9 +52,9 @@
       cp -rpv /usr/share/syslinux/* /home/tftpboot
 
 
-  - name: Write a block of text to the file
+  - name: Create the kickstart file
     blockinfile:
-      path: /home/tftpboot/rocky9ks
+      path: /home/tftpboot/rocky9ks/rocky9ks
       create: true
       marker: ""
       block: |
@@ -84,7 +84,7 @@
         rootpw --lock
         user --groups=wheel --name=breakglass --password=$6$FVwlA/hG5VmFeGaR$VcIZkgMWKxRYmawyDFOmgZuQ9Fzy0uh.Q.y3N6xUvURQ0bbXzeDy0n3mrX.idi1Wj1abppIfSmeloO5fn2SFC/ --iscrypted
    
-  - name: Write a block of text to the file
+  - name: Create the pxelinux.cfg/default
     blockinfile:
       path: /home/tftpboot/pxelinux.cfg/default
       create: true
