@@ -1,6 +1,3 @@
-- name: Build PXE server
-  tasks:
-  
   - name: Install tftp service
     dnf:
       name:
