@@ -1,0 +1,26 @@
+- name: Open firewall ports on IPA Server
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  with_items:
+  - tftp
+  - dhcp
+  - proxy-dhcp
+  - ssh
+  - dns
+  - http
+  - https
+  - kerberos
+  - kpasswd
+  - ldap
+  - ldaps
+  - nfs
+  - mountd
+  - rpc-bind
+  - syslog
+  - cockpit
+  - ntp
+  - wazuh
+  - syslog
