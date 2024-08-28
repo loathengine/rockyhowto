@@ -7,3 +7,4 @@
     - dhcp_server
     - pxe
     - ipa_server
+    - firewall_svc_base
