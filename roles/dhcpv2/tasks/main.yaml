@@ -1,62 +1,63 @@
 ---
+# tasks file for dhcpd
 
-- name: Check if at least one subnet is defined
-  ansible.builtin.assert:
-    that:
-    - dhcpd_subnets | length > 0
-    fail_msg: "No subnet defined"
+- name: Import assert.yml
+  ansible.builtin.import_tasks:
+    file: assert.yml
+  run_once: true
+  delegate_to: localhost
 
-- name: Include OS-specific variables
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-
-- name: Install dhcpd with dependencies
+- name: Install dhcpd software
   ansible.builtin.package:
-    name: "{{ item }}"
+    name: "{{ dhcpd_packages }}"
     state: present
-  with_items:
-  - "{{ dhcpd_package_names }}"
 
-- name: Create dhcpd config
+- name: Configure defaults
   ansible.builtin.template:
-    src: "dhcpd.conf.j2"
-    dest: "{{ dhcpd_main_config }}"
-    owner: "{{ dhcpd_unix_user }}"
-    group: "{{ dhcpd_unix_group }}"
-    mode: "0644"
+    src: "{{ dhcpd_defaults_src }}"
+    dest: "{{ dhcpd_defaults_dest }}"
+    backup: true
+    mode: "0640"
+  when:
+    - ansible_os_family == "Debian" or
+      ansible_distribution == "openSUSE Leap"
+  notify:
+    - Restart dhcpd
 
-- name: Cleanup cache files
-  notify: Restart dhcpd
+- name: Configure software
+  ansible.builtin.template:
+    src: dhcpd.conf.j2
+    dest: "{{ dhcpd_confdir }}/dhcpd.conf"
+    backup: true
+    mode: "0640"
+  notify:
+    - Restart dhcpd
+
+- name: Start and enable software
   block:
-  - name: Check if cache dir exists
-    ansible.builtin.stat:
-      path: "{{ dhcpd_cache_directory }}"
-    register: cache_stats
-  - name: Remove cache dir
-    ansible.builtin.file:
-      path: "{{ dhcpd_cache_directory }}"
-      state: absent
-    when: cache_stats.stat.exists
-  - name: Create cache dir
-    ansible.builtin.file:
-      path: "{{ dhcpd_cache_directory }}"
-      owner: "{{ dhcpd_unix_user }}"
-      group: "{{ dhcpd_unix_group }}"
-      mode: "0755"
-      state: directory
-  - name: Create cache files
-    ansible.builtin.file:
-      path: "{{ dhcpd_cache_directory }}/{{ item }}"
-      owner: "{{ dhcpd_unix_user }}"
-      group: "{{ dhcpd_unix_group }}"
-      mode: "0644"
-      state: touch
-    with_items:
-    - dhcpd.leases
+    - name: Start and enable software
+      ansible.builtin.service:
+        name: "{{ dhcpd_service }}"
+        state: started
+        enabled: true
+  rescue:
+    - name: Install procps
+      ansible.builtin.package:
+        name: procps
+        state: present
 
-- name: Start and enable dhcpd
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  with_items:
-  - "{{ dhcpd_service_name }}"
+    - name: Stop dhcpd
+      ansible.builtin.command:
+        cmd: pkill dhcpd
+        removes: nothing
+
+    - name: Remove pid file
+      ansible.builtin.file:
+        path: /var/run/dhcpd.pid
+        state: absent
+
+    - name: Start and enable software again
+      ansible.builtin.service:
+        name: "{{ dhcpd_service }}"
+        state: started
+        enabled: true
