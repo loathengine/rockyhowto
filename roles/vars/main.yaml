@@ -29,6 +29,29 @@ dhcpd_subnets:
 dhcpd_filename: pxelinux.0
 dhcpd_next_server: 10.9.8.10
 
+dhcp_fixed
+  - host: tor01
+    mac: {{ tor01.int1.mac }}
+    ip: {{tor01.int1.ip}}
+  - host: edg01
+    mac: {{ edg01.int1.mac }}
+    ip: {{edg01.int1.ip}}    
+  - host: svc01
+    mac: {{ svc01.int1.mac }}
+    ip: {{svc01.int1.ip}}
+  - host: node01
+    mac: {{ node01.int1.mac }}
+    ip: {{node01.int1.ip}}
+  - host: node02
+    mac: {{ node02.int1.mac }}
+    ip: {{node02.int1.ip}}
+  - host: node03
+    mac: {{ node03.int1.mac }}
+    ip: {{node03.int1.ip}}
+  - host: node04
+    mac: {{ node04.int1.mac }}
+    ip: {{node04.int1.ip}}
+
 
 
 # Config "local" yum repos
