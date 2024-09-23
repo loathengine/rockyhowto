@@ -6,26 +6,15 @@ option broadcast-address {{ dhcpd_broadcast_address }};
 option routers {{ dhcpd_routers }};
 option domain-name-servers {{ dhcpd_domain_name_servers | join(', ') }};
 option domain-search "{{ dhcpd_domain_search }}";
-
-{% for subnet in dhcpd_subnets %}
 subnet {{ subnet.network }} netmask {{ subnet.netmask }} {
-{% if subnet.range_start is defined and subnet.range_end is defined %}
-  range {{ subnet.range_start }} {{ subnet.range_end }};
-{% endif %}
-{% if dhcpd_filename is defined %}  filename "{{ dhcpd_filename }}";
-{% endif %}
-{% if dhcpd_next_server is defined %}  next-server {{ dhcpd_next_server }};
-{% endif %}
+  range {{ subnet.range_start }} {{ subnet.range_end }};}
+filename "{{ dhcpd_filename }}";
+next-server {{ dhcpd_next_server }};
 
-{% if dhcp_fixed is defined %}
-  range {{ subnet.range_start }} {{ subnet.range_end }};
-
-}
+{% for host in dhcp_fixed %}
+host {{ hosts }} {
+    hardware ethernet    {{ mac }}
+    fixed address        {{ ip }}
+    option host-name     "{{ hosts}}"; }
 {% endfor %}
 
-
-
-        host edg01 {
-        	hardware ethernet    6c:4b:90:3a:4b:9a;
-        	fixed-address        10.9.8.1;
-                option host-name "edg01";}
