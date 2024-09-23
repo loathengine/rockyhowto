@@ -1,5 +1,5 @@
   - name: Install tftp service
-    dnf:
+    package:
       name:
         - tftp-server
         - syslinux
@@ -8,7 +8,7 @@
       state: latest
 
   - name: Create new dirs
-    ansible.builtin.file:
+    file:
       path: "{{ item }}"
       state: directory
     loop:
@@ -32,7 +32,7 @@
       backrefs: yes
 
   - name: Restart service tftp also issue daemon-reload to pick up config changes
-    ansible.builtin.systemd_service:
+    systemd_service:
       state: restarted
       daemon_reload: true
       name: tftp
