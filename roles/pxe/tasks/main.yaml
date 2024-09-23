@@ -43,7 +43,6 @@
       dest: /home/tftpboot/rocky9pxe
       files:
       - images/pxeboot/initrd.img
-      - images/pxeboot/initrd.img
 
   - name: copy contents to iso directorys
     shell: |
