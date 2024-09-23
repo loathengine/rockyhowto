@@ -2,42 +2,42 @@
 
 all:
   hosts:
-    tor01.rockyhowto.lab:
+    tor01:
       int1:
         mac: c8:9e:43:9c:4e:a2
         label: ent1
 
-    edg01.rockyhowto.lab:
+    edg01:
       int1:
         mac: a0:48:1c:93:e7:24
         label: eno1
       boot: sda
 
-    svc01.rockyhowto.lab:
+    svc01:
       int1:
         mac: a0:48:1c:89:ef:2b
         label: eno1
       boot: sda
 
-    node01.rockyhowto.lab:
+    node01:
       int1:
         mac: 1c:fd:08:73:bb:7c
         label: enp3s0f0
       boot: sda
 
-    node02.rockyhowto.lab:
+    node02:
       int1:
         mac: 1c:fd:08:72:46:1e
         labelNIC: eno1
       boot: sda
 
-    node03.rockyhowto.lab:
+    node03:
       int1: 10.9.8.130
         mac: 1c:fd:08:73:bd:ea
         label: eno1
       boot: sda
 
-    node04.rockyhowto.lab:
+    node04:
       int1:
         mac: 1c:fd:08:73:bb:e6
         label: eno1
@@ -45,47 +45,47 @@ all:
 
 networking:
   hosts:
-    tor01.rockyhowto.lab
+  - tor01
 
 
 rockylinux:
   hosts:
-    edg01.rockyhowto.lab:
-    svc01.rockyhowto.lab:
-    node01.rockyhowto.lab:
-    node02.rockyhowto.lab:
-    node03.rockyhowto.lab:
-    node04.rockyhowto.lab:
+    edg01:
+    svc01:
+    node01:
+    node02:
+    node03:
+    node04:
 
 ipaserver:
   hosts:
-    svc01.rockyhowto.lab:
+    svc01:
 
 ipaclients:
   hosts:
-    edg01.rockyhowto.lab:
-    node01.rockyhowto.lab:
-    node02.rockyhowto.lab:
-    node03.rockyhowto.lab:
-    node04.rockyhowto.lab:
+    edg01:
+    node01:
+    node02:
+    node03:
+    node04:
 
 gateway:
   hosts:
-    edg01.rockyhowto.lab:
+    edg01:
 
 kubeall:
   hosts:
-    node01.rockyhowto.lab:
-    node02.rockyhowto.lab:
-    node03.rockyhowto.lab:
-    node04.rockyhowto.lab:
+    node01:
+    node02:
+    node03:
+    node04:
 
 kubecontrol:
   hosts:
-    node01.rockyhowto.lab:
+    node01:
 
 kubenode:
   hosts:
-    node02.rockyhowto.lab:
-    node03.rockyhowto.lab:
-    node04.rockyhowto.lab:
+    node02:
+    node03:
+    node04:
