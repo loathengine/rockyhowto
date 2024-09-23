@@ -1,5 +1,5 @@
 - name: Set a hostname
-  ansible.builtin.hostname:
+  hostname:
     name: svc01
 
 - name: Install packages
@@ -89,7 +89,7 @@
 
 
 - name: Add Repo directory rule to httpd
-  ansible.builtin.blockinfile:
+  blockinfile:
     path: /etc/httpd/conf.d/repo.conf
     create: yes
     block: |
@@ -107,7 +107,7 @@
     restorecon -F -R -v /home/repo
 
 - name: Add PXE directory rule to httpd
-  ansible.builtin.blockinfile:
+  blockinfile:
     path: /etc/httpd/conf.d/pxe.conf
     create: yes
     block: |
