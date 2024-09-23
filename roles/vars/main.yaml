@@ -26,7 +26,8 @@ dhcpd_subnets:
     range_start: 10.9.8.200
     range_end: 10.9.8.250
 
-
+dhcpd_filename: pxelinux.0
+dhcpd_next_server: 10.9.8.10
 
 
 
