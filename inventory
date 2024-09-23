@@ -1,36 +1,46 @@
+---
+
 all:
   hosts:
     tor01.rockyhowto.lab:
-      IP: 10.9.8.5
+      int1:
+        mac: c8:9e:43:9c:4e:a2
+        label: ent1
+
     edg01.rockyhowto.lab:
-      IP: 10.9.8.1
-      MAC: a0:48:1c:93:e7:24
-      NIC: eno1
+      int1:
+        mac: a0:48:1c:93:e7:24
+        label: eno1
       boot: sda
+
     svc01.rockyhowto.lab:
-      IP: 10.9.8.10
-      MAC: a0:48:1c:89:ef:2b
-      NIC: eno1
+      int1:
+        mac: a0:48:1c:89:ef:2b
+        label: eno1
       boot: sda
+
     node01.rockyhowto.lab:
-      IP: 10.9.8.110
-      MAC: 1c:fd:08:73:bb:7c
-      NIC: enp3s0f0
+      int1:
+        mac: 1c:fd:08:73:bb:7c
+        label: enp3s0f0
       boot: sda
+
     node02.rockyhowto.lab:
-      IP: 10.9.8.120
-      MAC: 1c:fd:08:72:46:1e
-      NIC: eno1
+      int1:
+        mac: 1c:fd:08:72:46:1e
+        labelNIC: eno1
       boot: sda
+
     node03.rockyhowto.lab:
-      IP: 10.9.8.130
-      MAC: 1c:fd:08:73:bd:ea
-      NIC: eno1
+      int1: 10.9.8.130
+        mac: 1c:fd:08:73:bd:ea
+        label: eno1
       boot: sda
+
     node04.rockyhowto.lab:
-      IP: 10.9.8.140
-      MAC: 1c:fd:08:73:bb:e6
-      NIC: eno1
+      int1:
+        mac: 1c:fd:08:73:bb:e6
+        label: eno1
       boot: sda
 
 networking:
