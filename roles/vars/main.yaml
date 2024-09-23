@@ -3,6 +3,9 @@ gateway_server: 10.9.8.1
 dns_server: 10.9.8.10
 domain_name: rockyhowtto.lab
 
+
+
+
 edg01_external_interface_label: enp0s20f0u6
 edg01_internal_interface_label: enp0s31f6
 
