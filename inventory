@@ -114,11 +114,11 @@ dhcpd_packages: dhcp-server
 
 dhcpd_default_lease_time: 600
 dhcpd_max_lease_time: 7200
-dhcpd_subnet_mask: {{ tier1_subnet }}
-dhcpd_broadcast_address: {{ tier1_broadcast }}
-dhcpd_routers: {{ tier1_gateway_server }}
-dhcpd_domain_name_servers: {{ tier1_dns_server }}
-dhcpd_domain_search: {{ tier1_domain_name }}
+#dhcpd_subnet_mask: {{ tier1_subnet }}
+#dhcpd_broadcast_address: {{ tier1_broadcast }}
+#dhcpd_routers: {{ tier1_gateway_server }}
+#dhcpd_domain_name_servers: {{ tier1_dns_server }}
+#dhcpd_domain_search: {{ tier1_domain_name }}
 dhcpd_subnets:
   - subnet: 
     network: {{ tier1_subnet }}
