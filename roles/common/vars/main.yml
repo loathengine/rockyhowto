@@ -29,7 +29,7 @@ dhcpd_subnets:
 dhcpd_filename: pxelinux.0
 dhcpd_next_server: 10.9.8.10
 
-dhcp_fixed
+dhcp_fixed:
   - host: tor01
     mac: {{ tor01.int1.mac }}
     ip: {{tor01.int1.ip}}
