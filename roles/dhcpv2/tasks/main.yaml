@@ -6,11 +6,6 @@
 #    name: "{{ dhcpd_packages }}"
 #    state: present
 
-- name: Display all variables/facts known for a host
-  debug:
-    var: hostvars[inventory_hostname]
-  tags: debug_info
-
 - name: Use template (dhcpd.conf.j2) to make /etc/dhcp/dhcpd.conf
   ansible.builtin.template:
     src: dhcpd.conf.j2
