@@ -107,12 +107,11 @@ tier1_gateway_server: 10.9.8.1
 tier1_dns_server: 10.9.8.10
 tier1_domain_name: rockyhowtto.lab
 
-##DHCP specific settings
-#tasks/main.yaml
+
 dhcpd_service_name: dhcpd
 dhcpd_packages: dhcp-server
 
-#templates/dhcpd.conf.j2
+
 dhcpd_default_lease_time: 600
 dhcpd_max_lease_time: 7200
 dhcpd_subnet_mask: {{ tier1_subnet }}
