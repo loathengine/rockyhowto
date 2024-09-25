@@ -52,7 +52,7 @@ all:
 
 networking:
   hosts:
-  - tor01
+    tor01
 
 
 rockylinux:
