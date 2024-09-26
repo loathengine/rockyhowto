@@ -1,0 +1,81 @@
+tier1_cidr: 10.9.8.0/24
+tier1_subnet: 10.9.8.0
+tier1_subnet_mask: 255.255.255.0
+tier1_broadcast: 10.9.8.255
+tier1_gateway_server: 10.9.8.1 
+tier1_dns_server: 10.9.8.10
+tier1_domain_name: rockyhowtto.lab
+
+
+dhcpd_service_name: dhcpd
+dhcpd_packages: dhcp-server
+
+
+dhcpd_default_lease_time: 600
+dhcpd_max_lease_time: 7200
+#dhcpd_subnet_mask: {{ tier1_subnet }}
+#dhcpd_broadcast_address: {{ tier1_broadcast }}
+#dhcpd_routers: {{ tier1_gateway_server }}
+#dhcpd_domain_name_servers: {{ tier1_dns_server }}
+#dhcpd_domain_search: {{ tier1_domain_name }}
+dhcpd_subnets:
+  - subnet: 
+    network: 10.9.8.0
+    netmask: 255.255.255.0
+    range_start: 10.9.8.200
+    range_end: 10.9.8.250
+
+dhcpd_filename: pxelinux.0
+dhcpd_next_server: 10.9.8.10
+
+dhcp_fixed:
+  - host: tor01
+    mac: c8:9e:43:9c:4e:a2
+    ip: 10.9.8.5
+  - host: edg01
+    mac: a0:48:1c:93:e7:24
+    ip: 10.9.8.1  
+  - host: svc01
+    mac: a0:48:1c:89:ef:2b
+    ip: 10.9.8.10
+  - host: node01
+    mac: 1c:fd:08:73:bb:7c
+    ip: 10.9.8.110
+  - host: node02
+    mac: 1c:fd:08:72:46:1e
+    ip: 10.9.8.120
+  - host: node03
+    mac: 1c:fd:08:73:bd:ea
+    ip: 10.9.8.130
+  - host: node04
+    mac: 1c:fd:08:73:bb:e6
+    ip: 10.9.8.140
+
+
+
+# Config "local" yum repos
+local_repos:
+  - file: local_baseos
+    name: local_baseos
+    description: Local RockyLinux 9 BaseOS
+    baseurl: file:///home/repo/baseos
+  - file: local_appstream
+    name: local_appstream
+    description: Local RockyLinux 9 Appstream
+    baseurl: file:///home/repo/appstream
+  - file: local_epel
+    name: local_epel
+    description: Local RockyLinux 9 EPEL
+    baseurl: file:///home/repo/epel
+  - file: local_docker-ce-stable
+    name: local_docker-ce-stable
+    description: Docker CE Stable
+    baseurl: file:///home/repo/docker-ce-stable
+  - file: local_kubernetes
+    name: local_kubernetes
+    description: Kubernetes
+    baseurl: file:///home/repo/kubernetes
+  - file: local_wazuh
+    name: local_wazuh
+    description: Wazuh
+    baseurl: file:///home/repo/wazuh
