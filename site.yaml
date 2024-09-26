@@ -1,4 +1,2 @@
 - import_playbook: first.yaml
-
-- name: Bare include (free-form)
-  ansible.builtin.include_vars: vars/global.yaml
+    include_vars: vars/global.yaml
