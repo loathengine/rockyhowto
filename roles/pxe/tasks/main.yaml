@@ -1,4 +1,4 @@
-  - name: Install tftp service
+  - name: Install required tftp packages
     package:
       name:
         - tftp-server
