@@ -1,7 +1,3 @@
-- name: Set a hostname
-  hostname:
-    name: svc01
-
 - name: Install packages
   package:
     name: "{{ item }}"
@@ -11,12 +7,7 @@
   - ipa-server-dns
   - freeipa-client
 
-- name: Add FQDN to local hosts file
-  lineinfile:
-    dest: /etc/hosts
-    line: "10.9.8.10   svc01.rockyhowto.lab svc01"
-
-- name: Clean up resolve
+- name: Modify resolve to use new local IPA DNS server
   lineinfile:
     dest: /etc/resolv.conf
     line: "{{ item }}"
@@ -86,6 +77,14 @@
     chown -hRv ansible:ansible /home/domainusers/ansible
     ipa user-mod ansible --sshpubkey="$(cat /home/domainusers/ansible/.ssh/id_rsa.pub)"
     ipa group-add-member sudoers --users=ansible
+
+- name: Modify resolve to use new local IPA DNS server
+  lineinfile:
+    dest: /etc/resolv.conf
+    line: "{{ item }}"
+  with_items:
+  - "search lan rockyhowto.lab"
+  - "nameserver 10.9.8.10"
 
 
 - name: Add Repo directory rule to httpd
