@@ -1,2 +1,3 @@
 - import_playbook: first.yaml
-    include_vars: vars/global.yaml
+  vars:
+    my_vars_file: vars/global.yaml
