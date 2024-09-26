@@ -121,8 +121,8 @@ dhcpd_max_lease_time: 7200
 #dhcpd_domain_search: {{ tier1_domain_name }}
 dhcpd_subnets:
   - subnet: 
-    network: {{ tier1_subnet }}
-    netmask: {{tier1_subnet_mask}}
+    network: 10.9.8.0
+    netmask: 255.255.255.0
     range_start: 10.9.8.200
     range_end: 10.9.8.250
 
