@@ -1,5 +1,7 @@
 - hosts: localhost
   connection: local
+  vars:
+    username: bob
   roles:
 #    - dnf
 #    - repo_server
