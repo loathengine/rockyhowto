@@ -7,14 +7,6 @@
   - ipa-server-dns
   - freeipa-client
 
-- name: Modify resolve to use new local IPA DNS server
-  lineinfile:
-    dest: /etc/resolv.conf
-    line: "{{ item }}"
-  with_items:
-  - "search lan rockyhowto.lab"
-  - "nameserver 10.9.8.10"
-
 - name: Run freeIPA configuration script
   ignore_errors: true
   shell: |
@@ -49,7 +41,7 @@
     ipa service-add nfs/svc01.rockyhowto.lab
     kadmin.local ktadd nfs/svc01.rockyhowto.lab
     systemctl restart nfs-server
-    ipa config-mod --homedirectory=/home/domainusers --defaultshell=/bin/bash
+    ipa config-mod --homedirectory=/home/ipa_users --defaultshell=/bin/bash
 
 - name: Setup sudoers group and permissions
   ignore_errors: true
@@ -85,7 +77,6 @@
   with_items:
   - "search lan rockyhowto.lab"
   - "nameserver 10.9.8.10"
-
 
 - name: Add Repo directory rule to httpd
   blockinfile:
