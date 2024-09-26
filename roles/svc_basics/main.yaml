@@ -8,8 +8,3 @@
   lineinfile:
     dest: /etc/hosts
     line: "10.9.8.10   svc01.rockyhowto.lab svc01"
-
-- name: Make/Update /etc/chrony.conf
-  lineinfile:
-    dest: /etc/chrony.conf
-    line: "allow 10.9.8.0/24"
