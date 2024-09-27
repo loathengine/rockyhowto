@@ -6,13 +6,13 @@ option broadcast-address {{ tier1_broadcast }};
 option routers {{ tier1_gateway_server }};
 option domain-name-servers {{ tier1_dns_server | join(', ') }};
 option domain-search "{{ tier1_domain_name }}";
-subnet {{ subnet.network }} netmask {{ subnet.netmask }} {
-  range {{ subnet.range_start }} {{ subnet.range_end }};}
+subnet {{ dhcpd_subnet_cidr }} netmask {{ dhcpd_subnet_netmask }} {
+  range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
 filename "{{ dhcpd_filename }}";
 next-server {{ dhcpd_next_server }};
 
 {% for host in dhcp_fixed %}
-host {{ hosts }} {
+host {{ host }} {
     hardware ethernet    {{ mac }}
     fixed address        {{ ip }}
     option host-name     "{{ hosts}}"; }
