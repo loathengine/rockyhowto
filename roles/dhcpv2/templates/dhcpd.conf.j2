@@ -1,6 +1,6 @@
 option domain-name "{{ tier1_domain_name }};
 option domain-name-servers {{tier1_dns_server}};
-option routers {{10.9.8.1}};
+option routers {{tier1_gateway_server}};
 default-lease-time {{ dhcpd_default_lease_time }};
 max-lease-time {{ dhcpd_max_lease_time }};
 authoritative;
