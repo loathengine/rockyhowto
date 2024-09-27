@@ -7,7 +7,7 @@ authoritative;
 filename "{{ dhcpd_filename }}";
 next-server {{ dhcpd_next_server }};
 
-subnet {{ dhcpd_subnet_cidr }} netmask {{ dhcpd_subnet_netmask }} {
+subnet {{ tier1_cidr }} netmask {{ tier1_subnet_mask }} {
   range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
 
 #{% for node in bare_metal %}
