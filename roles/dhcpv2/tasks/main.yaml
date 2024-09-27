@@ -1,20 +1,19 @@
 ---
-# tasks file for dhcpd
 
-#- name: Install required dhcpd packages
-#  ansible.builtin.package:
-#    name: "{{ dhcpd_packages }}"
-#    state: present
+- name: Install required dhcpd packages
+  ansible.builtin.package:
+    name: "{{ dhcpd_packages }}"
+    state: present
 
 - name: Use template (dhcpd.conf.j2) to make /etc/dhcp/dhcpd.conf
   ansible.builtin.template:
     src: dhcpd.conf.j2
-    dest: /tmp/dhcpd.conf
+    dest: /etc/dhcpd/dhcpd.conf
     backup: true
     mode: "0640"
 
-#- name: Start and enable software
-#  ansible.builtin.service:
-#    name: "{{ dhcpd_service }}"
-#    state: restarted
-#    enabled: true
+- name: Start and enable software
+  ansible.builtin.service:
+    name: "{{ dhcpd_service }}"
+    state: restarted
+    enabled: true
