@@ -11,7 +11,7 @@ subnet {{ dhcpd_subnet_cidr }} netmask {{ dhcpd_subnet_netmask }} {
 filename "{{ dhcpd_filename }}";
 next-server {{ dhcpd_next_server }};
 
-{% for host in dhcp_fixed %}
+{% for node in nodes %}
 host {{ host }} {
     hardware ethernet    {{ host.mac }}
     fixed address        {{ host.ip }}
