@@ -1,1 +1,1 @@
-- import_playbook: basic_svc.yaml
+- import_playbook: svc_basics.yaml
