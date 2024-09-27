@@ -4,7 +4,7 @@ tier1_subnet_mask: 255.255.255.0
 tier1_broadcast: 10.9.8.255
 tier1_gateway_server: 10.9.8.1 
 tier1_dns_server: 10.9.8.10
-tier1_domain_name: rockyhowtto.lab
+tier1_domain_name: rockyhowto.lab
 
 
 dhcpd_service_name: dhcpd
