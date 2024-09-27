@@ -5,7 +5,7 @@
 #    - repo_server
 #    - ntp
 #    - dhcp_server
-    - dhcpv2
+#    - dhcpv2
 #    - pxe
 #    - ipa_server
 #    - firewall_svc_base
