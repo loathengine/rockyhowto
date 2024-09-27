@@ -7,13 +7,13 @@ authoritative;
 filename "{{ dhcpd_filename }}";
 next-server {{ dhcpd_next_server }};
 
-#subnet {{ tier1_cidr }} netmask {{ tier1_subnet_mask }} {
-#  range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
+subnet {{ tier1_cidr }} netmask {{ tier1_subnet_mask }} {
+  range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
 
-#{% for node in bare_metal %}
-#host {{ nodes.hostname }} {
-#    hardware ethernet    {{ nodes.mac }}
-#    fixed address        {{ nodes.ip }}
-#    option host-name     "{{ nodes.hostname }}"; }
-#{% endfor %}
+{% for node in bare_metal %}
+host {{ nodes.hostname }} {
+    hardware ethernet    {{ nodes.mac }}
+    fixed address        {{ nodes.ip }}
+    option host-name     "{{ nodes.hostname }}"; }
+{% endfor %}
 
