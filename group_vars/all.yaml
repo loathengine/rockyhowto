@@ -53,7 +53,7 @@ dhcpd_next_server: 10.9.8.10
 
 ### for role repo_server ###
 
-repo.tmp.path.file: /tmp/repo.tmp
+repo_tmp_path_file: /tmp/repo.tmp
 
 sync_repos:
 #  - repo: baseos
