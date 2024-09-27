@@ -1,0 +1,22 @@
+        text
+        reboot
+        repo --name="baseos" --baseurl=http://10.9.8.10/repo/baseos/ --install
+        repo --name="epel" --baseurl=http://10.9.8.10/repo/epel/ --install
+        keyboard --vckeymap=us --xlayouts='us'
+        lang en_US.UTF-8
+        firewall --enabled --service=ssh
+        network  --bootproto=dhcp --device=link --noipv6 --activate
+        url --url="http://10.9.8.10/repo/baseos/"
+        %packages
+        @^minimal-environment
+        %end
+        selinux --enforcing
+        firstboot --disable
+        skipx
+        bootloader --append="rhgb quiet crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M" --location=mbr --boot-drive=sda
+        autopart
+        zerombr
+        clearpart --all --initlabel
+        timezone Etc/UTC --utc
+        rootpw --lock
+        user --groups=wheel --name=breakglass --password=$6$FVwlA/hG5VmFeGaR$VcIZkgMWKxRYmawyDFOmgZuQ9Fzy0uh.Q.y3N6xUvURQ0bbXzeDy0n3mrX.idi1Wj1abppIfSmeloO5fn2SFC/ --iscrypted
