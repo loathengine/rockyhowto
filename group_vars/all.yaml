@@ -18,12 +18,10 @@ dhcpd_max_lease_time: 7200
 #dhcpd_routers: {{ tier1_gateway_server }}
 #dhcpd_domain_name_servers: {{ tier1_dns_server }}
 #dhcpd_domain_search: {{ tier1_domain_name }}
-dhcpd_subnets:
-  - subnet: 
-    network: 10.9.8.0
-    netmask: 255.255.255.0
-    range_start: 10.9.8.200
-    range_end: 10.9.8.250
+dhcpd_subnet_cidr: 10.9.8.0
+dhcpd_subnet_netmask: 255.255.255.0
+dhcpd_subnet_range_start: 10.9.8.200
+dhcpd_subnet_range_end: 10.9.8.250
 
 dhcpd_filename: pxelinux.0
 dhcpd_next_server: 10.9.8.10
