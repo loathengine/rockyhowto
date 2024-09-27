@@ -19,20 +19,22 @@
 #    backup: true
 #    mode: "0640"
 
+- name: Create repo directories
+  ansible.builtin.file:
+    path: /home/repo/{{ item.repo }}
+    state: directory
+  loop: "{{ sync_repos }}"
+
 
 - name: Create repo directories and populate form the internet
   ignore_errors: true
   shell: |
-    mkdir -p /home/repo/{{ item.repo }};
-#      for i in baseos epel appstream docker-ce-stable kubernetes wazuh; 
-#        do mkdir -p /home/repo/$i;
-#        dnf reposync \
-#        --download-path=/home/repo/ \
-#        --repoid=$i \
-#        --newest-only \
-#        --download-metadata \
-#        --config=/tmp/tmp.repo ;
-#        done
+        dnf reposync \
+        --download-path=/home/repo/ \
+        --repoid=item.repo \
+        --newest-only \
+        --download-metadata \
+        --config=/tmp/sync_repos.repo ;
   loop: "{{ sync_repos }}"
       
 #- name: Build up local repo conf
