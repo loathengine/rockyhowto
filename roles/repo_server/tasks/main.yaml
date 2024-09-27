@@ -13,12 +13,12 @@
 #  ignore_errors: true
 #  shell: /bin/rm -rf /etc/yum.repos.d/*
 
-- name: Use template (repo.temp.j2) to make /tmp/repo.temp
-  ansible.builtin.template:
-    src: repo.temp.j2
-    dest: "{{ repo.tmp.path.file }}"
-    backup: true
-    mode: "0666"
+#- name: Use template (repo.temp.j2) to make /tmp/repo.temp
+#  ansible.builtin.template:
+#    src: repo.temp.j2
+#    dest: "{{ repo.tmp.path.file }}"
+#    backup: true
+#    mode: "0666"
 
 - name: Create repo directories
   ansible.builtin.file:
