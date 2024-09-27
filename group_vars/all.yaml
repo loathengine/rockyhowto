@@ -26,26 +26,33 @@ dhcpd_subnet_range_end: 10.9.8.250
 dhcpd_filename: pxelinux.0
 dhcpd_next_server: 10.9.8.10
 
-dhcp_fixed:
-  - host: tor01
+nodes:
+  - node: tor01
+    hostname: tor01
     mac: c8:9e:43:9c:4e:a2
     ip: 10.9.8.5
-  - host: edg01
+  - node: edg01
+    hostname: edg01
     mac: a0:48:1c:93:e7:24
     ip: 10.9.8.1  
-  - host: svc01
+  - node: svc01
+    hostname: svc01
     mac: a0:48:1c:89:ef:2b
     ip: 10.9.8.10
-  - host: node01
+  - node: node01
+    hostname: node01
     mac: 1c:fd:08:73:bb:7c
     ip: 10.9.8.110
-  - host: node02
+  - node: node02
+    hostname: node02
     mac: 1c:fd:08:72:46:1e
     ip: 10.9.8.120
-  - host: node03
+  - node: node03
+    hostname: node03
     mac: 1c:fd:08:73:bd:ea
     ip: 10.9.8.130
-  - host: node04
+  - node: node04
+    hostname: node04
     mac: 1c:fd:08:73:bb:e6
     ip: 10.9.8.140
 
