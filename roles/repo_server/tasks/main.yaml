@@ -13,30 +13,30 @@
 #  ignore_errors: true
 #  shell: /bin/rm -rf /etc/yum.repos.d/*
 
-#- name: Use template (repo.temp.j2) to make /tmp/repo.temp
-#  ansible.builtin.template:
-#    src: repo.temp.j2
-#    dest: "{{ repo.tmp.path.file }}"
-#    backup: true
-#    mode: "0666"
+- name: Use template (repo.temp.j2) to make /tmp/repo.temp
+  ansible.builtin.template:
+    src: repo.temp.j2
+    dest: "{{ repo.tmp.path.file }}"
+    backup: true
+    mode: "0666"
 
-- name: Create repo directories
-  ansible.builtin.file:
-    path: /home/repo/{{ item.repo }}
-    state: directory
-  loop: "{{ sync_repos }}"
+#- name: Create repo directories
+#  ansible.builtin.file:
+#    path: /home/repo/{{ item.repo }}
+#    state: directory
+#  loop: "{{ sync_repos }}"
 
 
-- name: Create repo directories and populate form the internet
-  ignore_errors: true
-  shell: |
-        dnf reposync \
-        --download-path=/home/repo/ \
-        --repoid={{ item.repo}} \
-        --newest-only \
-        --download-metadata \
-        --config={{ repo.tmp.path.file }} ;
-  loop: "{{ sync_repos }}"
+#- name: Create repo directories and populate form the internet
+#  ignore_errors: true
+#  shell: |
+#        dnf reposync \
+#       --download-path=/home/repo/ \
+#        --repoid={{ item.repo}} \
+#        --newest-only \
+#        --download-metadata \
+#        --config={{ repo.tmp.path.file }} ;
+#  loop: "{{ sync_repos }}"
       
 #- name: Build up local repo conf
 #  yum_repository:
