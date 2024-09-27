@@ -12,9 +12,9 @@ filename "{{ dhcpd_filename }}";
 next-server {{ dhcpd_next_server }};
 
 {% for node in nodes %}
-host {{ host }} {
-    hardware ethernet    {{ host.mac }}
-    fixed address        {{ host.ip }}
-    option host-name     "{{ host }}"; }
+host {{ node.hostname }} {
+    hardware ethernet    {{ node.mac }}
+    fixed address        {{ node.ip }}
+    option host-name     "{{ node.hostname }}"; }
 {% endfor %}
 
