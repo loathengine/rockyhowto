@@ -10,7 +10,7 @@ next-server {{ dhcpd_next_server }};
 subnet {{ dhcpd_subnet_cidr }} netmask {{ dhcpd_subnet_netmask }} {
   range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
 
-{% for node in nodes %}
+{% for node in bare_metal %}
 host {{ nodes.hostname }} {
     hardware ethernet    {{ nodes.mac }}
     fixed address        {{ nodes.ip }}
