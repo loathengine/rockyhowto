@@ -4,7 +4,7 @@ max-lease-time {{ dhcpd_max_lease_time }};
 option subnet-mask {{ tier1_subnet }};
 option broadcast-address {{ tier1_broadcast }};
 option routers {{ tier1_gateway_server }};
-option domain-name-servers {{ tier1_dns_server | join(', ') }};
+option domain-name-servers {{ tier1_dns_server }};
 option domain-search "{{ tier1_domain_name }}";
 subnet {{ dhcpd_subnet_cidr }} netmask {{ dhcpd_subnet_netmask }} {
   range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
