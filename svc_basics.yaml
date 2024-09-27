@@ -2,7 +2,7 @@
   connection: local
   roles:
 #    - dnf
-#    - repo_server
+    - repo_server
 #    - ntp
 #    - dhcp_server
 #    - dhcpv2
