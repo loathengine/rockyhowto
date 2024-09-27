@@ -32,7 +32,7 @@
   shell: |
         dnf reposync \
         --download-path=/home/repo/ \
-        --repoid=item.repo \
+        --repoid={{ item.repo}} \
         --newest-only \
         --download-metadata \
         --config={{ repo.tmp.path.file }} ;
