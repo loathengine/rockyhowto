@@ -1,0 +1,25 @@
+default menu.c32
+prompt 0
+timeout 50
+ONTIMEOUT 1
+          
+menu title ########## Lab PXE Boot Menu ##########
+  label 1
+      menu label ^1) Boot from local drive
+      localboot
+  label 2
+      menu label ^2) Install Rocky 9 from inst.stage2
+      kernel rocky9pxe/vmlinuz
+      append initrd=rocky9pxe/initrd.img noapic inst.stage2=http://10.9.8.10/tftpboot/rocky9iso/ ip=dhcp
+  label 3
+      menu label ^3) Install Rocky 9 from inst.stage2 and kickstart
+      kernel rocky9pxe/vmlinuz
+      append initrd=rocky9pxe/initrd.img noapic inst.stage2=http://10.9.8.10/tftpboot/rocky9iso/ ip=dhcp inst.ks=http://10.9.8.10/tftpboot/rocky9ks/rocky9ks
+  label 4
+      menu label ^4) Install Openshift Bootstrap
+      KERNEL openshift/rhcos-live-kernel-x86_64
+      APPEND initrd=openshift/rhcos-live-initramfs.x86_64.img coreos.live.rootfs_url=http://10.9.8.10/tftpboot/openshift/rhcos-live-rootfs.x86_64.img coreos.inst.install_dev=/dev/sda coreos.inst.ignition_url=http://10.9.8.10/tftpboot/openshift/bootstrap.ign
+  label 5
+      menu label ^5) Install Openshift Control-Plane
+      KERNEL openshift/rhcos-live-kernel-x86_64
+      APPEND initrd=openshift/rhcos-live-initramfs.x86_64.img coreos.live.rootfs_url=http://10.9.8.10/tftpboot/openshift/rhcos-live-rootfs.x86_64.img coreos.inst.install_dev=/dev/sda coreos.inst.ignition_url=http://10.9.8.10/tftpboot/openshift/master.ign
