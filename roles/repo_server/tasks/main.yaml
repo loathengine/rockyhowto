@@ -29,12 +29,12 @@
 - name: Create repo directories and populate form the internet
   ignore_errors: true
   shell: |
-        dnf reposync \
-       --download-path=/home/repo/ \
-        --repoid={{ item.repo}} \
-        --newest-only \
-        --download-metadata \
-        --config={{ repo.tmp.path.file }} ;
+dnf reposync \
+--download-path=/home/repo/ \
+--repoid={{ item.repo}} \
+-newest-only \
+--download-metadata \
+--config={{ repo.tmp.path.file }} ;
   loop: "{{ sync_repos }}"
       
 #- name: Build up local repo conf
