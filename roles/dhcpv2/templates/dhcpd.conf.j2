@@ -13,8 +13,8 @@ next-server {{ dhcpd_next_server }};
 
 {% for host in dhcp_fixed %}
 host {{ host }} {
-    hardware ethernet    {{ mac }}
-    fixed address        {{ ip }}
-    option host-name     "{{ hosts}}"; }
+    hardware ethernet    {{ host.mac }}
+    fixed address        {{ host.ip }}
+    option host-name     "{{ host }}"; }
 {% endfor %}
 
