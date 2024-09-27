@@ -11,9 +11,9 @@ subnet {{ tier1_cidr }} netmask {{ tier1_subnet_mask }} {
   range {{ dhcpd_subnet_range_start }} {{ dhcpd_subnet_range_end }};}
 
 {% for node in bare_metal %}
-host {{ nodes.hostname }} {
-    hardware ethernet    {{ nodes.mac }}
-    fixed address        {{ nodes.ip }}
-    option host-name     "{{ nodes.hostname }}"; }
+host {{ node.hostname }} {
+    hardware ethernet    {{ node.mac }}
+    fixed address        {{ node.ip }}
+    option host-name     "{{ node.hostname }}"; }
 {% endfor %}
 
