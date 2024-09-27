@@ -23,7 +23,7 @@
 - name: Create repo directories and populate form the internet
   ignore_errors: true
   shell: |
-    mkdir /home/repo/{{ item }};
+    mkdir /home/repo/{{ item.repo }};
 #      for i in baseos epel appstream docker-ce-stable kubernetes wazuh; 
 #        do mkdir -p /home/repo/$i;
 #        dnf reposync \
