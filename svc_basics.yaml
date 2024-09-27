@@ -4,7 +4,6 @@
 #    - dnf
 #    - repo_server
 #    - ntp
-#    - dhcp_server
 #    - dhcpv2
 #    - pxe
 #    - ipa_server
