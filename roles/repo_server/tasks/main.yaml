@@ -1,23 +1,23 @@
-- name: Install createrepo RPM
-  package:
-   name: createrepo
-    state: present
+#- name: Install createrepo RPM
+#  package:
+#   name: createrepo
+#    state: present
 
-- name: Install yum-utils RPM
-  package:
-    name: yum-utils
-    state: present
+#- name: Install yum-utils RPM
+#  package:
+#    name: yum-utils
+#    state: present
 
-- name: Delete default repos
-  ignore_errors: true
-  shell: /bin/rm -rf /etc/yum.repos.d/*
+#- name: Delete default repos
+#  ignore_errors: true
+#  shell: /bin/rm -rf /etc/yum.repos.d/*
 
-- name: Use template (repo.temp.j2) to make /tmp/repo.temp
-  ansible.builtin.template:
-    src: repo.temp.j2
-    dest: /tmp/repo.temp
-    backup: true
-    mode: "0640"
+#- name: Use template (repo.temp.j2) to make /tmp/repo.temp
+#  ansible.builtin.template:
+#    src: repo.temp.j2
+#    dest: /tmp/repo.temp
+#    backup: true
+#    mode: "0640"
 
 
 - name: Create repo directories and populate form the internet
@@ -34,21 +34,20 @@
 #        --config=/tmp/tmp.repo ;
 #        done
   loop: "{{ sync_repos }}"
+      
+#- name: Build up local repo conf
+#  yum_repository:
+#    file: "{{ item.file }}"
+#    name: "{{ item.name }}"
+#    description: "{{ item.description }}"
+#    baseurl: "{{ item.baseurl }}"
+#    gpgcheck: False
+#  loop: "{{ local_repos }}"
 
-          
-    - name: Build up local repo conf
-      yum_repository:
-        file: "{{ item.file }}"
-        name: "{{ item.name }}"
-        description: "{{ item.description }}"
-        baseurl: "{{ item.baseurl }}"
-        gpgcheck: False
-      loop: "{{ local_repos }}"
+# - name: Delete rocky repos
+#   ignore_errors: true
+#   shell: /bin/rm -rf /etc/yum.repos.d/rocky*
 
-    - name: Delete rocky repos
-      ignore_errors: true
-      shell: /bin/rm -rf /etc/yum.repos.d/rocky*
-
-    - name: Update selinux
-      ignore_errors: true
-      shell: restorecon -r /home/repo
+#- name: Update selinux
+#  ignore_errors: true
+#  shell: restorecon -r /home/repo
