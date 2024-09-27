@@ -16,7 +16,7 @@
 - name: Use template (repo.temp.j2) to make /tmp/repo.temp
   ansible.builtin.template:
     src: repo.temp.j2
-    dest: /tmp/tmp.file
+    dest: "{{ repo_tmp_path_file }}"
     backup: true
     mode: "0666"
 
