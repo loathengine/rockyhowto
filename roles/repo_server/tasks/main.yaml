@@ -28,7 +28,7 @@
 
 - name: Create repo directories and populate form the internet
   ignore_errors: true
-    shell: |
+  shell: |
     dnf reposync \
       --download-path=/home/repo/ \
       --repoid={{ item.repo }} \
