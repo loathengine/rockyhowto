@@ -14,6 +14,6 @@ subnet {{ tier1_cidr }} netmask {{ tier1_subnet_mask }} {
 host {{ node.hostname }} {
     hardware ethernet    {{ node.mac }}
     fixed address        {{ node.ip }}
-    option host-name     "{{ node.hostname }}"; }
+    option host-name     {{ node.hostname }}; }
 {% endfor %}
 
