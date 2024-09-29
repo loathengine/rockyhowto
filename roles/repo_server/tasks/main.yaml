@@ -51,9 +51,9 @@
     gpgcheck: False
   loop: "{{ local_repos }}"
 
- - name: Delete rocky repos
-   ignore_errors: true
-   shell: /bin/rm -rf /etc/yum.repos.d/rocky*
+- name: Delete rocky repos
+  ignore_errors: true
+  shell: /bin/rm -rf /etc/yum.repos.d/rocky*
 
 - name: Update selinux
   ignore_errors: true
