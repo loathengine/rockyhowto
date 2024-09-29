@@ -1,10 +1,10 @@
 - hosts: localhost
   connection: local
   roles:
-#    - dnf
-#    - repo_server
-#    - ntp
-#    - dhcpv2
+    - dnf
+    - repo_server
+    - ntp
+#    - dhcp
 #    - pxe
 #    - ipa_server
-#    - firewall_svc_base
+    - firewall_svc_base
