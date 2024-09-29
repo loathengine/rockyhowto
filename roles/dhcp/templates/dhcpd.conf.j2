@@ -12,8 +12,8 @@ subnet {{ tier1_subnet }} netmask {{ tier1_subnet_mask }} {
 
 {% for node in bare_metal %}
 host {{ node.hostname }} {
-    hardware ethernet    {{ node.mac }}
-    fixed address        {{ node.ip }}
+    hardware ethernet    {{ node.mac }};
+    fixed address        {{ node.ip }};
     option host-name     {{ node.hostname }}; }
 {% endfor %}
 
