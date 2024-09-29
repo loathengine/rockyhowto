@@ -50,23 +50,23 @@ dhcpd_next_server: 10.9.8.10
 ### for role repo_server ###
 repo_tmp_path_file: /tmp/repo.tmp
 sync_repos:
-#  - repo: baseos
-#    file: local_baseos
-#    name: local_baseos
-#    description: Local RockyLinux BaseOS
-#    baseurl: file:///home/repo/baseos
+  - repo: baseos
+    file: local_baseos
+    name: local_baseos
+    description: Local RockyLinux BaseOS
+    baseurl: file:///home/repo/baseos
     
-#  - repo: epel
-#    file: local_epel
-#    name: local_epel
-#    description: Local RockyLinux EPEL
-#    baseurl: file:///home/repo/epel
+  - repo: epel
+    file: local_epel
+    name: local_epel
+    description: Local RockyLinux EPEL
+    baseurl: file:///home/repo/epel
     
-#  - repo: appstream
-#    file: local_appstream
-#    name: local_appstream
-#    description: Local RockyLinux Appstream
-#    baseurl: file:///home/repo/appstream
+  - repo: appstream
+    file: local_appstream
+    name: local_appstream
+    description: Local RockyLinux Appstream
+    baseurl: file:///home/repo/appstream
     
   - repo: docker-ce-stable
     file: local_docker-ce-stable
@@ -74,14 +74,14 @@ sync_repos:
     description: Docker CE Stable
     baseurl: file:///home/repo/docker-ce-stable
     
-#  - repo: kubernetes
-#    file: local_kubernetes
-#    name: local_kubernetes
-#    description: Local Kubernetes
-#    baseurl: file:///home/repo/kubernetes
+  - repo: kubernetes
+    file: local_kubernetes
+    name: local_kubernetes
+    description: Local Kubernetes
+    baseurl: file:///home/repo/kubernetes
     
-#  - repo: wazuh
-#    file: local_wazuh
-#    name: local_wazuh
-#    description: Local Wazuh
-#    baseurl: file:///home/repo/wazuh
+  - repo: wazuh
+    file: local_wazuh
+    name: local_wazuh
+    description: Local Wazuh
+    baseurl: file:///home/repo/wazuh
