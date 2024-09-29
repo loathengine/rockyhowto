@@ -1,4 +1,4 @@
-option domain-name {{ tier1_domain_name }};
+option domain-name "{{ tier1_domain_name }}";
 option domain-name-servers {{tier1_dns_server}};
 option routers {{tier1_gateway_server}};
 default-lease-time {{ dhcpd_default_lease_time }};
