@@ -1,54 +1,54 @@
-  - name: Install required tftp packages
-    package:
-      name:
-        - tftp-server
-        - syslinux
-        - syslinux-tftpboot
-        - policycoreutils-python-utils 
-      state: latest
+- name: Install required tftp packages
+  package:
+    name:
+      - tftp-server
+      - syslinux
+      - syslinux-tftpboot
+      - policycoreutils-python-utils 
+    state: latest
 
-  - name: Create new dirs
-    file:
-      path: "{{ item }}"
-      state: directory
-    loop:
-      - /home/iso/mnt
-      - /home/tftpboot
-      - /home/tftpboot/rocky9pxe
-      - /home/tftpboot/rocky9iso
-      - /home/tftpboot/rocky9ks
-      - /home/tftpboot/pxelinux.cfg
+- name: Create new dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /home/iso/mnt
+    - /home/tftpboot
+    - /home/tftpboot/rocky9pxe
+    - /home/tftpboot/rocky9iso
+    - /home/tftpboot/rocky9ks
+    - /home/tftpboot/pxelinux.cfg
      
-  - name: Update SElinux to allow tftp service to use the new dir
-    shell: |
-      semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
-      restorecon -R -v /home/tftpboot
+- name: Update SElinux to allow tftp service to use the new dir
+  shell: |
+    semanage fcontext -a -t tftpdir_rw_t "/home/tftpboot(/.*)?"
+    restorecon -R -v /home/tftpboot
 
-  - name: Edit the service to use the new dir
-    lineinfile: 
-      path: /lib/systemd/system/tftp.service 
-      regexp: '^(.*)ExecStart(.*)$' 
-      line: 'ExecStart=/usr/sbin/in.tftpd -s /home/tftpboot'
-      backrefs: yes
+- name: Edit the service to use the new dir
+  lineinfile: 
+    path: /lib/systemd/system/tftp.service 
+    regexp: '^(.*)ExecStart(.*)$' 
+    line: 'ExecStart=/usr/sbin/in.tftpd -s /home/tftpboot'
+    backrefs: yes
 
-  - name: Restart service tftp also issue daemon-reload to pick up config changes
-    systemd_service:
-      state: restarted
-      daemon_reload: true
-      name: tftp
+- name: Restart service tftp also issue daemon-reload to pick up config changes
+  systemd_service:
+    state: restarted
+    daemon_reload: true
+    name: tftp
 
-  - name: Extract kernel and ramdisk from a LiveCD
-    community.general.iso_extract:
-      image: /home/iso/Rocky9.iso
-      dest: /home/tftpboot/rocky9pxe
-      files:
-      - images/pxeboot/initrd.img
+- name: Extract kernel and ramdisk from a LiveCD
+  community.general.iso_extract:
+    image: /home/iso/Rocky9.iso
+    dest: /home/tftpboot/rocky9pxe
+    files:
+    - images/pxeboot/initrd.img
 
-  - name: copy contents to iso directorys
-    shell: |
-      mount -o loop /home/iso/Rocky9.iso /home/iso/mnt
-      cp -rpv /home/iso/mnt/* /home/tftpboot/rocky9iso
-      cp -rpv /usr/share/syslinux/* /home/tftpboot
+- name: copy contents to iso directorys
+  shell: |
+    mount -o loop /home/iso/Rocky9.iso /home/iso/mnt
+    cp -rpv /home/iso/mnt/* /home/tftpboot/rocky9iso
+    cp -rpv /usr/share/syslinux/* /home/tftpboot
 
 - name: Use template (rocky9ks.j2) to make /home/tftpboot/rocky9ks/rocky9ks
   ansible.builtin.template:
