@@ -1,0 +1,8 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - repo_server
+    - ntp
+    - dhcp
+    - pxe
+#    - ipa_server
