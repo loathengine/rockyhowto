@@ -36,11 +36,8 @@ bare_metal:
     mac: 1c:fd:08:73:bb:e6
     ip: 10.9.8.140
 
-### for role dhcpv2 ###
-
-dhcpd_service_name: dhcpd
+### for role dhcp ###
 dhcpd_packages: dhcp-server
-
 
 dhcpd_default_lease_time: 600
 dhcpd_max_lease_time: 7200
@@ -50,11 +47,8 @@ dhcpd_subnet_range_end: 10.9.8.250
 dhcpd_filename: pxelinux.0
 dhcpd_next_server: 10.9.8.10
 
-
 ### for role repo_server ###
-
 repo_tmp_path_file: /tmp/repo.tmp
-
 sync_repos:
 #  - repo: baseos
 #    file: local_baseos
