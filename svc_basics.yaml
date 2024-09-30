@@ -2,9 +2,5 @@
   connection: local
   roles:
     - dnf
-#    - repo_server
     - ntp
-#    - dhcp
-#    - pxe
-#    - ipa_server
     - firewall_svc_base
