@@ -4,4 +4,3 @@
     - svc_naming
     - dnf
     - ntp
-    - firewall_svc_base
