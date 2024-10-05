@@ -85,3 +85,12 @@ sync_repos:
     name: local_wazuh
     description: Local Wazuh
     baseurl: file:///home/repo/wazuh
+
+### for role ipa_server ###
+
+ds-password: ChangePassword
+admin-password: ChangePassword
+
+
+
+
