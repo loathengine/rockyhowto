@@ -1,4 +1,9 @@
-  - name: Make/Update /etc/chrony.conf
-    lineinfile:
-      dest: /etc/chrony.conf
-      line: "allow 10.9.8.0/24"
+- name: Make/Update /etc/chrony.conf
+  lineinfile:
+    dest: /etc/chrony.conf
+    line: "allow 10.9.8.0/24"
+
+- name: restart chrony
+  service:
+    name: chronyd
+    state: restarted
