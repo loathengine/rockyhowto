@@ -3,7 +3,8 @@
     dest: /etc/chrony.conf
     line: "allow 10.9.8.0/24"
 
-- name: restart chrony
-  service:
+- name: Restart service chrony
+  ansible.builtin.service:
     name: chronyd
     state: restarted
+    enabled: true
