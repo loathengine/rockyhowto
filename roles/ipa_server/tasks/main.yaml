@@ -12,12 +12,12 @@
   shell: |
     ipa-server-install -v \
       --unattended \
-      --domain=rockyhowto.lab \
+      --domain={{ tier1_domain_name }} \
       --hostname svc01.rockyhowto.lab \
       --ip-address=10.9.8.10 \
       --realm ROCKYHOWTO.LAB \
-      --ds-password ChangePassword \
-      --admin-password ChangePassword \
+      --ds-password {{ ds-password }} \
+      --admin-password {{ admin-password }} \
       --setup-dns \
       --auto-reverse \
       --forwarder=8.8.8.8 \
