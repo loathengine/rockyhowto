@@ -114,3 +114,7 @@
     semanage fcontext -a -t public_content_t "/home/tftpboot(/.*)?"
     restorecon -F -R -v /home/tftpboot
 
+- name: restart ipa
+  service:
+    name: ipa
+    state: restarted
