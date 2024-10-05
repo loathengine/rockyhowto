@@ -118,3 +118,9 @@
   service:
     name: ipa
     state: restarted
+
+- name: Restart service ipa
+  ansible.builtin.service:
+    name: ipa
+    state: restarted
+    enabled: true
