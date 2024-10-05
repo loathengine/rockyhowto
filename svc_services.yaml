@@ -1,8 +1,8 @@
 - hosts: localhost
   connection: local
   roles:
-#    - firewall_svc_base
-#    - repo_server
-#    - ntp
+    - firewall_svc_base
+    - repo_server
+    - ntp
     - dhcp
     - pxe
