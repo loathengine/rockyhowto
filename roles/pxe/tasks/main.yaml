@@ -35,6 +35,7 @@
   systemd_service:
     state: restarted
     daemon_reload: true
+    enabled: yes
     name: tftp
 
 - name: Extract kernel and ramdisk from a LiveCD
