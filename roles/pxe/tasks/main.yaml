@@ -44,6 +44,7 @@
     dest: /home/tftpboot/rocky9pxe
     files:
     - images/pxeboot/initrd.img
+    - images/pxeboot/vmlinuz
 
 - name: copy contents to iso directorys
   shell: |
